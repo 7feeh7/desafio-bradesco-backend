@@ -7,7 +7,10 @@ config();
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bradesco');
+mongoose.set('strictQuery', true);
+
+mongoose
+    .connect('mongodb://localhost:27017/bradesco');
 
 app.use(express.json());
 app.use(router);

@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { v4 } from "uuid";
 
-const Bot = new mongoose.Schema({
-    id: {
+const BotSchema = new Schema({
+    _id: {
         type: String,
+        default: () => v4(),
         require: true
     },
     name: {
@@ -11,4 +13,4 @@ const Bot = new mongoose.Schema({
     }
 });
 
-export default mongoose.model("Bot", Bot);
+export default mongoose.model("Bot", BotSchema);
