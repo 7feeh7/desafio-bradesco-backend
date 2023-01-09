@@ -7,9 +7,6 @@ botsRouter.post('/', BotController.create);
 botsRouter.get('/:id', BotController.findOne);
 botsRouter.get('/', BotController.findAll);
 botsRouter.put('/:id', BotController.update);
-
-botsRouter.delete('/:id', (request, response) => {
-    return response.status(201).send();
-});
+botsRouter.delete('/:id', BotController.delete);
 
 export default botsRouter;

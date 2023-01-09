@@ -57,6 +57,19 @@ class BotController {
             });
         }
     }
+    async delete(request: Request, response: Response) {
+        try {
+            const { id } = request.params;
+
+            await Bot.deleteOne({ _id: id });
+            return response.status(204).send();
+        } catch (err) {
+            console.error(err);
+            return response.status(500).json({
+                message: err
+            });
+        }
+    }
 }
 
 export default new BotController;
