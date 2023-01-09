@@ -1,14 +1,11 @@
 import { Router } from "express";
+import BotController from "../controllers/BotController";
 
 const botsRouter = Router();
 
-botsRouter.post('/', (request, response) => {
-    return response.status(201).send();
-});
+botsRouter.post('/', BotController.create);
 
-botsRouter.get('/:id', (request, response) => {
-    return response.status(201).send();
-});
+botsRouter.get('/:id', BotController.findOne);
 
 botsRouter.put('/:id', (request, response) => {
     return response.status(201).send();
@@ -18,4 +15,4 @@ botsRouter.delete('/:id', (request, response) => {
     return response.status(201).send();
 });
 
-export { botsRouter }
+export default botsRouter;

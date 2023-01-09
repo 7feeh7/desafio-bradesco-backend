@@ -10,4 +10,4 @@ messagesRouter.get('/:id', (request, response) => {
     return response.status(201).send();
 });
 
-export { messagesRouter }
+export default messagesRouter;
