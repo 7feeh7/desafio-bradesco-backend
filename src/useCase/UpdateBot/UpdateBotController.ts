@@ -12,9 +12,9 @@ export class UpdateBotController {
         const { name } = request.body;
 
         try {
-            const bot = await this.updateBotUseCase.execute({ id, name });
+            await this.updateBotUseCase.execute({ id, name });
             
-            return response.status(200).json(bot);
+            return response.status(204).send();
         } catch (err) {
             return response.status(500).json({
                 message: err.message

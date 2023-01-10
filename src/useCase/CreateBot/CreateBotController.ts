@@ -12,7 +12,7 @@ export class CreateBotController {
         try {
             const bot = await this.createBotUseCase.execute({ id, name });
             
-            return response.status(200).json(bot);
+            return response.status(201).json(bot);
         } catch (err) {
             return response.status(500).json({
                 message: err.message

@@ -4,15 +4,15 @@ import { CreateMessageUseCase } from "./CreateMessageUseCase";
 export class CreateMessageController {
     constructor(
         private createMessageUseCase: CreateMessageUseCase,
-    ){}
+    ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const {                 
+        const {
             conversationId,
             timestamp,
             from,
             to,
-            text 
+            text
         } = request.body;
 
         try {
@@ -21,10 +21,10 @@ export class CreateMessageController {
                 timestamp,
                 from,
                 to,
-                text 
+                text
             });
-            
-            return response.status(200).json(message);
+
+            return response.status(201).json(message);
         } catch (err) {
             return response.status(500).json({
                 message: err.message

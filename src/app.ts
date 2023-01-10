@@ -1,16 +1,10 @@
 import express from "express";
-import { config } from "dotenv";
 import router from "./routes";
-import mongoose from "mongoose";
-
-config();
+import MongoService from "./repositories/mongodb/MongoService";
 
 const app = express();
 
-mongoose.set('strictQuery', true);
-
-mongoose
-    .connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`)
+MongoService.connectDB();
 
 app.use(express.json());
 app.use(router);

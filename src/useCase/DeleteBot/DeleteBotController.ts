@@ -10,9 +10,9 @@ export class DeleteBotController {
         const { id } = request.params;
 
         try {
-            const bot = await this.deleteBotUseCase.execute(id);
+            await this.deleteBotUseCase.execute(id);
             
-            return response.status(200).json(bot);
+            return response.status(204).send();
         } catch (err) {
             return response.status(500).json({
                 message: err.message

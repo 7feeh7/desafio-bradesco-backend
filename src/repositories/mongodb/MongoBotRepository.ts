@@ -1,6 +1,6 @@
 import { Bot } from "../../entities/Bot";
 import { IBotRepository } from "../IBotRepository";
-import MongooseBot from "../../database/schemas/Bot";
+import MongooseBot from "./schemas/Bot";
 
 export class MongoBotRepository implements IBotRepository{
     async create(bot: Bot): Promise<Bot> {

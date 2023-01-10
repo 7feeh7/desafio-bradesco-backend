@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { createMessageController } from "../useCase/CreateMessage";
 import { getMessageByIdController } from "../useCase/GetMessageById";
-import { getMessageByConversationIdController } from "../useCase/GetMessageByConversationId"
+import { getMessageByConversationIdController } from "../useCase/GetMessageByConversationId";
 
 const messagesRouter = Router();
 

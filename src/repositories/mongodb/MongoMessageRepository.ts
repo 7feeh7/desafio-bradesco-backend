@@ -1,6 +1,6 @@
 import { Message } from "../../entities/Message";
 import { IMessageRepository } from "../IMessageRepository";
-import MongooseMessage from "../../database/schemas/Message";
+import MongooseMessage from "./schemas/Message";
 
 export class MongoMessageRepository implements IMessageRepository{
     async create(message: Message): Promise<Message> {
