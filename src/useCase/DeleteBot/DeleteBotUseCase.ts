@@ -1,4 +1,4 @@
-import { IBotRepository } from "../../repositories/BotRepository";
+import { IBotRepository } from "../../repositories/IBotRepository";
 
 export class DeleteBotUseCase {
     constructor(

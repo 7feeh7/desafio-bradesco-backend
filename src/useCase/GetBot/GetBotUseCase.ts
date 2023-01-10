@@ -1,4 +1,4 @@
-import { IBotRepository } from "../../repositories/BotRepository";
+import { IBotRepository } from "../../repositories/IBotRepository";
 import { IGetBotResponseDTO } from "./GetBotDTO";
 
 export class GetBotUseCase {

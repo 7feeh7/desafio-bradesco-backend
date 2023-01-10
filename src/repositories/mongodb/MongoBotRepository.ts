@@ -1,5 +1,5 @@
 import { Bot } from "../../entities/Bot";
-import { IBotRepository } from "../BotRepository";
+import { IBotRepository } from "../IBotRepository";
 import MongooseBot from "../../database/schemas/Bot";
 
 export class MongoBotRepository implements IBotRepository{

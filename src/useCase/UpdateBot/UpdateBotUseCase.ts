@@ -1,5 +1,5 @@
 import { Bot } from "../../entities/Bot";
-import { IBotRepository } from "../../repositories/BotRepository";
+import { IBotRepository } from "../../repositories/IBotRepository";
 
 export class UpdateBotUseCase {
     constructor(
