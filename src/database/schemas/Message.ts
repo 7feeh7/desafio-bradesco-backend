@@ -4,15 +4,18 @@ import { v4 } from "uuid";
 const MessagesSchema = new Schema({
     id: {
         type: String,
+        default: () => v4(),
         require: true
     },
     conversationId: {
         type: String,
+        default: () => v4(),
         require: true
     },
     timestamp: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        require: true
     },
     from: {
         type: String,
@@ -24,6 +27,7 @@ const MessagesSchema = new Schema({
     },
     text: {
         type: String,
+        require: true
     },
 });
 

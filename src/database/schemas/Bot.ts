@@ -1,8 +1,10 @@
 import mongoose, { Schema } from "mongoose";
+import { v4 } from "uuid";
 
 const BotSchema = new Schema({
     id: {
         type: String,
+        default: () => v4(),
         require: true
     },
     name: {

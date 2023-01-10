@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { v4 } from "uuid";
+
 import Message from "../database/schemas/Message";
 
 class MessageController {
@@ -14,7 +14,6 @@ class MessageController {
             } = request.body;
             
             const message = await Message.create({
-                id: v4(),
                 conversationId,
                 timestamp,
                 from,

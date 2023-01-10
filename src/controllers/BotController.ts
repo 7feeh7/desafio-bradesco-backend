@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { v4 } from "uuid";
+
 import Bot from "../database/schemas/Bot";
 
 class BotController {
@@ -7,11 +7,17 @@ class BotController {
         try {
             const { id, name } = request.body;
             
-            const bot = await Bot.create({ id: (!id) ? v4() : id, name });
+            const bot = await Bot.create({ 
+                id, 
+                name 
+            });
 
             await bot.save();
 
-            return response.json(bot);
+            return response.json({
+                id: bot.id,
+                name: bot.name
+            });
         } catch (err) {
             console.error(err);
             return response.status(500).json({
@@ -22,9 +28,13 @@ class BotController {
     async getById(request: Request, response: Response) {
         try {
             const { id } = request.params;
-            const bot = await Bot.findById({ _id: id });
 
-            return response.json({ id: bot.id, name: bot.name });
+            const bot = await Bot.findOne({ id });
+
+            return response.json({
+                id: bot.id,
+                name: bot.name
+            });
         } catch (err) {
             console.error(err);
             return response.status(500).json({
@@ -34,8 +44,15 @@ class BotController {
     }
     async get (request: Request, response: Response) {
         try {
+            let botsNormalized = [];
+
             const bots = await Bot.find({});
-            return response.json(bots);
+
+            for (const bot of bots) {
+                botsNormalized.push({ id: bot.id, name: bot.name });
+            }
+
+            return response.json(botsNormalized);
         } catch (err) {
             console.error(err);
             return response.status(500).json({
@@ -49,7 +66,7 @@ class BotController {
             
             const { name } = request.body;
             
-            await Bot.updateOne({ _id: id }, { name });
+            await Bot.updateOne({ id }, { name });
             return response.status(204).send();
         } catch (err) {
             console.error(err);
@@ -62,7 +79,7 @@ class BotController {
         try {
             const { id } = request.params;
 
-            await Bot.deleteOne({ _id: id });
+            await Bot.deleteOne({ id });
             return response.status(204).send();
         } catch (err) {
             console.error(err);
