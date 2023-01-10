@@ -5,14 +5,14 @@ import Message from "../database/schemas/Message";
 class MessageController {
     async create(request: Request, response: Response) {
         try {
-            const { 
+            const {
                 conversationId,
                 timestamp,
                 from,
                 to,
                 text
             } = request.body;
-            
+
             const message = await Message.create({
                 conversationId,
                 timestamp,
@@ -23,7 +23,14 @@ class MessageController {
 
             await message.save();
 
-            return response.json(message);
+            return response.json({
+                id: message.id,
+                conversationId: message.conversationId,
+                timestamp: message.timestamp,
+                from: message.from,
+                to: message.to,
+                text: message.text
+            });
         } catch (err) {
             console.error(err);
             return response.status(500).json({
@@ -37,7 +44,14 @@ class MessageController {
 
             const message = await Message.findOne({ id });
 
-            return response.json(message);
+            return response.json({
+                id: message.id,
+                conversationId: message.conversationId,
+                timestamp: message.timestamp,
+                from: message.from,
+                to: message.to,
+                text: message.text
+            });
 
         } catch (err) {
             console.error(err);
@@ -48,11 +62,24 @@ class MessageController {
     }
     async getByConversationId(request: Request, response: Response) {
         try {
+            let messagesNormalized = [];
+
             const { conversationId } = request.query;
 
             const messages = await Message.find({ conversationId });
-            
-            return response.json(messages);
+
+            for (const message of messages) {
+                messagesNormalized.push({
+                    id: message.id,
+                    conversationId: message.conversationId,
+                    timestamp: message.timestamp,
+                    from: message.from,
+                    to: message.to,
+                    text: message.text
+                });
+            }
+
+            return response.json(messagesNormalized);
         } catch (err) {
             console.error(err);
             return response.status(500).json({
