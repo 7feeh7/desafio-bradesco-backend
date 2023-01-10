@@ -1,4 +1,4 @@
-import { MongoBotRepository } from "../../repositories/implementations/MongoBotRepository";
+import { MongoBotRepository } from "../../repositories/mongodb/MongoBotRepository";
 import { CreateBotController } from "./CreateBotController";
 import { CreateBotUseCase } from "./CreateBotUseCase";
 

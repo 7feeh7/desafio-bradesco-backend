@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
-import { CreateBotUseCase } from "./CreateBotUseCase";
+import { UpdateBotUseCase } from "./UpdateBotUseCase";
 
-export class CreateBotController {
+export class UpdateBotController {
     constructor(
-        private createBotUseCase: CreateBotUseCase,
+        private updateBotUseCase: UpdateBotUseCase,
     ){}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { id, name } = request.body;
+        const { id } = request.params;
+
+        const { name } = request.body;
 
         try {
-            const bot = await this.createBotUseCase.execute({ id, name });
+            const bot = await this.updateBotUseCase.execute({ id, name });
             
             return response.status(200).json(bot);
         } catch (err) {

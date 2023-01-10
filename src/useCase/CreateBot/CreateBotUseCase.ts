@@ -9,14 +9,6 @@ export class CreateBotUseCase {
 
     async execute(data: ICreateBotRequestDTO): Promise<ICreateBotResponseDTO> {
         const bot = new Bot(data);
-
-        const botData = await this.botRepository.create(bot);
-
-        const response = {
-            id: botData.id,
-            name: botData.name
-        }
-
-        return response;
+        return await this.botRepository.create(bot);
     }
 }

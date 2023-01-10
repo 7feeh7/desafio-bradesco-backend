@@ -7,14 +7,6 @@ export class GetBotUseCase {
     ) {}
 
     async execute(): Promise<IGetBotResponseDTO> {
-        let botsNormalized = [];
-
-        const bots = await this.botRepository.get();
-
-        for (const bot of bots) {
-            botsNormalized.push({ id: bot.id, name: bot.name });
-        }
-
-        return botsNormalized;
+        return await this.botRepository.get();
     }
 }

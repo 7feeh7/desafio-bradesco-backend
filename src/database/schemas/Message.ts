@@ -29,6 +29,11 @@ const MessagesSchema = new Schema({
         type: String,
         require: true
     },
+}, { versionKey: false });
+
+MessagesSchema.set('toJSON', {
+    virtuals: true,
+    transform: function(_, ret) { delete ret._id }
 });
 
 export default mongoose.model("message", MessagesSchema);
