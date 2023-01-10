@@ -1,16 +1,17 @@
 import { Request, Response } from "express";
+import { v4 } from "uuid";
 import Bot from "../database/schemas/Bot";
 
 class BotController {
     async create(request: Request, response: Response) {
         try {
-            const { name } = request.body;
+            const { id, name } = request.body;
             
-            const bot = await Bot.create({ name });
+            const bot = await Bot.create({ id: (!id) ? v4() : id, name });
 
             await bot.save();
 
-            return response.json({ id: bot.id, name: bot.name });
+            return response.json(bot);
         } catch (err) {
             console.error(err);
             return response.status(500).json({
@@ -18,9 +19,9 @@ class BotController {
             });
         }
     }
-    async findOne(request: Request, response: Response) {
+    async getById(request: Request, response: Response) {
         try {
-            const { id } = request.params
+            const { id } = request.params;
             const bot = await Bot.findById({ _id: id });
 
             return response.json({ id: bot.id, name: bot.name });
@@ -31,7 +32,7 @@ class BotController {
             });
         }
     }
-    async findAll (request: Request, response: Response) {
+    async get (request: Request, response: Response) {
         try {
             const bots = await Bot.find({});
             return response.json(bots);
